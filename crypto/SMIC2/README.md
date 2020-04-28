@@ -116,7 +116,7 @@ solve e*d + φ(n)*k = 1 over the integers
 
 </h3>
 
-Le tour est joué ! C'était long mais instructif. On obtienr alors la clé de déchiffrement:
+Le tour est joué ! C'était long mais instructif. On obtient alors la clé de déchiffrement:
 
 ```
 d = 800878107345050108835195439921605173926573074665532982471877
@@ -131,7 +131,7 @@ Nous avons donc trouvé *m*  et avons le flag !
 m = 563694726501963824567957403529535003815080102246078401707923
 ```
 
-## ⛓️ Sources <a name = "limitations"></a>
+## ⛓️ Sources <a name = "idea"></a>
 
 RSA : https://fr.wikipedia.org/wiki/Chiffrement_RSA<br>
 FactorDB : http://factordb.com/<br>
