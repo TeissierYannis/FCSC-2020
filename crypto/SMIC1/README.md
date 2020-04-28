@@ -75,5 +75,4 @@ Et voilà, nous avons le flag :
 ## ⛓️ Sources <a name = "limitations"></a>
 
 RSA : https://fr.wikipedia.org/wiki/Chiffrement_RSA<br>
-CyberChef : https://gchq.github.io/CyberChef/<br>
 Le programme Python pour trouver c : [findC.py](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/SMIC1/findC.py)
