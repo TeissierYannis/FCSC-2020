@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img style="width:150px;" src="https://france-cybersecurity-challenge.fr/themes/ecsc/static/img/logo.png" alt="Project logo"></a>
+ <img style="width:50px;" src="https://france-cybersecurity-challenge.fr/themes/ecsc/static/img/logo.png" alt="Project logo"></a>
 </p>
 <h1 align="center">Bestiary</h1>
 
