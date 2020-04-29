@@ -65,11 +65,8 @@ if __name__ == "__main__":
 	print("=-= ECC-Based Secure Flag Storage =-=")
 	print("=-=      (under development)      =-=")
 	print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-
-	Q = 0 * C.G
-	Q.x = 0x40276f768df2ee9c83d935f10036734ea50c235b2c5c48295e498776ec02c4b6
-	Q.y = 0xd3e076127e072d8a5743828683a9d16ee12c9d8d3c6782a37c2fbda11fd77d81
 	
+	Q = sk * C.G
 	print("Public Point Q:")
 	print("  Q.x: 0x{:064x}".format(Q.x))
 	print("  Q.y: 0x{:064x}".format(Q.y))

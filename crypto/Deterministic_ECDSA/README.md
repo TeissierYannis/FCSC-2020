@@ -92,7 +92,7 @@ Il y a deux cas, prenons les exemples avec le point Q :
   3. Effectuer une symétrie axiale de l'abscisse pour trouver le point P' qui est votre point 2Q.
 * Addition avec d'autres points (P + Q) :
   1. Tracer la droite QP.
-  2. L'intersection de cette droit avec la courbe C devient un point que nous appellerons K.
+  2. L'intersection de cette droite avec la courbe C devient un point que nous appellerons K.
   3. Effectuer une symétrie axiale de l'abscisse pour trouver le point K' qui est votre point P + Q.
 
 ▶ Si vous n'avez toujours pas compris l'addition, regardez cette séquence d'une vidéo de Computerphile sur le sujet => https://youtu.be/NF1pwjL9-DE?t=103.
@@ -151,7 +151,7 @@ Pour ce qui est de la signature :
 **Le couple `(r, s)` est donc la signature de notre message !**
 
 Je n'en ai pas parlé mais la clé privée est nommée `sk` dans notre programme. Elle est secrète.
-Si on la trouve, on casse la protection est on peut calculer toute les signatures que l'on veut.
+Si on la trouve, on casse la protection est on peut calculer toutes les signatures que l'on veut.
 
 Je n'en ai pas parlé mais il existe un point, qui dans le programme est appelé `Q`. C'est en fait le point publique
 de notre ECDSA. Ce point fait office de clé publique en quelque sorte. Pour ce CTF, il ne nous sera pas très utile car on veut simplement casser
@@ -165,7 +165,7 @@ Il est seulement utilisé dans la fonction `verify()` qui ne vaut pas la peine d
 Bon, ça vient cette résolution ?
 </h3>
 
-C'était long je suis d'accord, mais ça vallait la peine de s'y attarder, vous me remercierait la prochaine fois que vous serez confronter à de l'ECDSA !
+C'était long je suis d'accord, mais ça vallait la peine de s'y attarder, vous me remercierez la prochaine fois que vous serez confronter à de l'ECDSA !
 
 Observons tout d'abord, ce que fait le programme après l'initialisation de tous les attributs cités ci-dessus :
 
@@ -227,7 +227,7 @@ Et que la fonction `sign()` a été appelée avec les paramètres suivants pour 
 * sk : sk (clé privée)
 * msg : uid (message à envoyer)
 
-Nous savons maintenant qu'est-ce que nous devons envoyer. Si on regarde juste en dessous :
+Nous savons maintenant ce que nous devons envoyer. Si on regarde juste en dessous :
 
 ```python
 print("Access to flag is limited to admin user.")
@@ -314,8 +314,7 @@ Magnifique ! Voici un petit tableau récapitulatif de ce que nous avons actuelle
 | s      | 10066713059289160925333999328455981821059564507732314429708730262492915631839                                                                              |
 | q      | 109454571331697278617670725030735128146004546811402412653072203207726079563233                                                                             |
 | k      | 70733819118195826681301792940683243052880016025243997154863438540652504449380                                                                              |
-| h      | 15444618812947585739488029753262168162614881431472009834460038828557510992716
-           03629121642960225347476612356698727897238006014871528157491774548977039638779                                                                              |
+| h      | 1544461881294758573948802975326216816261488143147200983446003882855751099271603629121642960225347476612356698727897238006014871528157491774548977039638779 |
 
 Pour les calculs qui suivent, je vous conseille d'utiliser [Wolframalpha](https://www.wolframalpha.com/). Si certains calculs sont trop grand pour Wolframalpha, utiliser le logiciel [SageMath](http://www.sagemath.org/download.html)
 Notamment pour calculer des modulos avec de grands nombres.
@@ -394,9 +393,11 @@ Here is the stored flag: FCSC{2d6d125887b96c90cc3e4243b5d2ed13e0f18caccf117cb923
 
 ## ⛓️ Sources <a name = "idea"></a>
 
-Courbe elliptique : https://fr.wikipedia.org/wiki/Courbe_elliptique<br>
+Courbe elliptique (FR) : https://fr.wikipedia.org/wiki/Courbe_elliptique<br>
+Courbe elliptique (EN) : https://en.wikipedia.org/wiki/Elliptic_curve<br>
 ECDSA (FR) : https://fr.wikipedia.org/wiki/Elliptic_curve_digital_signature_algorithm<br>
 ECDSA (EN) : https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm<br>
+RFC 6979 : https://tools.ietf.org/html/rfc6979<br>
 Computerphile (YT) "Elliptic Curves" : https://www.youtube.com/watch?v=NF1pwjL9-DE<br>
 GitHub de fastecdsa : https://github.com/AntonKueltz/fastecdsa<br>
 CyberChef : https://gchq.github.io/CyberChef/<br>
