@@ -42,7 +42,9 @@ Vous allez ramer pendant plusieurs jours (expérience vécue !). On va donc fair
 
 Afin de mieux vous représenter, voîci une courbe générée au hasard qui nous servira de support pour générer des points, qui, dans le programme Python est appelée `C` :
 
-![EllipticCurve](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/simpleCurve.png "Courbe simple")
+<div align="center">
+  <img src="https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/simpleCurve.png"></img>
+</div>
 
 Cette courbe **C** est générée dans le programme comme ceci :
 
@@ -79,7 +81,9 @@ Les autres attributs sont utiles dans le cadre de la cryptographie. Avant de voi
 la notion "d'additionner" des points n'est pas la même que dans un plan à deux dimensions. Afin de faciliter la compréhension, voici des images représentant l'addition
 dans des courbes elliptiques pour que vous essayiez de comprendre de manière intuitive :
 
-![PointsAddition](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/pointsAddition.png "Addition de points sur une courbe elliptique")
+<div align="center">
+  <img src="https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/pointsAddition.png "></img>
+</div>
 
 Il y a deux cas, prenons les exemples avec le point Q :
 * Addition avec lui-même (2Q = Q + Q) :
