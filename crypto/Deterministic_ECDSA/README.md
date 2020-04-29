@@ -23,7 +23,7 @@
 
 On vous demande d'évaluer la sécurité d'un serveur de stockage de données en cours de développement.
 
-Service : nc challenges1.france-cybersecurity-challenge.fr 2000
+Service : `nc challenges1.france-cybersecurity-challenge.fr 2000`
 
 Fichier : <a href="https://github.com/TeissierYannis/FCSC-2020/tree/master/crypto/Deterministic_ECDSA/decdsa.py">decdsa.py</a>
 
@@ -40,11 +40,9 @@ La méthode de cryptographie ECDSA est basée sur des courbes (d'où le nom Elli
 Nous pourrions nous jeter dans le problème sans s'informer de quoi s'agit-il, mais ce n'est pas une bonne idée.
 Vous allez ramer pendant plusieurs jours (expérience vécue !). On va donc faire un peu de théorie avant d'y aller.
 
-Afin de mieux vous représenter, voîci une courbe générée au hasard qui nous servira de support pour générer des points, qui, dans le programme Python est appelée **C** :
+Afin de mieux vous représenter, voîci une courbe générée au hasard qui nous servira de support pour générer des points, qui, dans le programme Python est appelée `C` :
 
-<div align="center">
-  ![EllipticCurve](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/simpleCurve.png "Courbe simple")
-</div>
+![EllipticCurve](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/simpleCurve.png "Courbe simple")
 
 Cette courbe **C** est générée dans le programme comme ceci :
 
@@ -81,9 +79,7 @@ Les autres attributs sont utiles dans le cadre de la cryptographie. Avant de voi
 la notion "d'additionner" des points n'est pas la même que dans un plan à deux dimensions. Afin de faciliter la compréhension, voici des images représentant l'addition
 dans des courbes elliptiques pour que vous essayiez de comprendre de manière intuitive :
 
-<div align="center">
-  ![PointsAddition](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/pointsAddition.png "Addition de points sur une courbe elliptique")
-</div>
+![PointsAddition](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/pointsAddition.png "Addition de points sur une courbe elliptique")
 
 Il y a deux cas, prenons les exemples avec le point Q :
 * Addition avec lui-même (2Q = Q + Q) :
