@@ -43,7 +43,7 @@ Vous allez ramer pendant plusieurs jours (expérience vécue !). On va donc fair
 Afin de mieux vous représenter, voîci une courbe générée au hasard qui nous servira de support pour générer des points, qui, dans le programme Python est appelée **C** :
 
 <div align="center">
-  ![EllipticCurve](https://github.com/TeissierYannis/FCSC-2020/tree/master/crypto/Deterministic_ECDSA/img/simpleCurve.png)
+  ![EllipticCurve](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/simpleCurve.png "Courbe simple")
 </div>
 
 Cette courbe **C** est générée dans le programme comme ceci :
@@ -81,8 +81,8 @@ Les autres attributs sont utiles dans le cadre de la cryptographie. Avant de voi
 la notion "d'additionner" des points n'est pas la même que dans un plan à deux dimensions. Afin de faciliter la compréhension, voici des images représentant l'addition
 dans des courbes elliptiques pour que vous essayiez de comprendre de manière intuitive :
 
-<div align="center"><a name="addition"></a>
-  ![PointsAddition](https://github.com/TeissierYannis/FCSC-2020/tree/master/crypto/Deterministic_ECDSA/img/pointsAddition.png)
+<div align="center">
+  ![PointsAddition](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/img/pointsAddition.png "Addition de points sur une courbe elliptique")
 </div>
 
 Il y a deux cas, prenons les exemples avec le point Q :
@@ -100,7 +100,7 @@ Il y a deux cas, prenons les exemples avec le point Q :
 Maintenant que vous avez compris cela, sachez que `G` est un point de cette courbe. `G` sera le point qui générera tous les autres points de cette courbe en s'additionnant à lui-même
 à l'aide de la méthode vue ci-dessus. C'est en quelque sorte le point initial.
 
-Revenons donc à l'attribut `q`. L'attribut `q` est un **nombre** qui "renvoie" le point G à un point sur l'abcisse (et non pas l'origine comme on pourrait le croire). Il satisfait donc l'équation :
+Revenons donc à l'attribut `q`. L'attribut `q` est un **nombre** qui "renvoie" le point `G` à un point sur l'abcisse (et non pas l'origine comme on pourrait le croire). Il satisfait donc l'équation :
 
 <h3>
 qG = 0
@@ -117,7 +117,7 @@ Maintenant passons à la signature électronique (DSA = Digital Signature Algori
 La signature électronique
 </h3>
 
-ECDSA est signé par la paire (r, s) qui sont tout deux des entiers. Voici la fonction qui signe le message dans notre programme :
+ECDSA est signé par la paire `(r, s)` qui sont tout deux des entiers. Voici la fonction qui signe le message dans notre programme :
 
 ```python
 def sign(C, sk, msg):
@@ -142,13 +142,13 @@ def sign(C, sk, msg):
 C'est en somme assez simple. On doit créer deux nombres entiers pour cela :
 * `k` : Généré à partir du hash SHA-256 du message que l'on veut signer.
 * `h` : Généré à partir du hash SHA-512 du message que l'on veut signer.
-* `P` : Un point de la courbe généré par le produit `kG` (voir [addition](#addition))
+* `P` : Un point de la courbe généré par le produit `kG` (voir addition)
 
 Pour ce qui est de la signature :
 * `r` : Coordonnée X du point P (ne dépend que de `k` en fait)
 * `s` : Calcul de modulo avec `k`, `q`, `h`, `r` ainsi que la clé privée `sk`.
 
-Le couple (r, s) est donc la signature de notre message !
+**Le couple `(r, s)` est donc la signature de notre message !**
 
 Je n'en ai pas parlé mais la clé privée est nommée `sk` dans notre programme. Elle est secrète.
 Si on la trouve, on casse la protection est on peut calculer toute les signatures que l'on veut.
@@ -158,6 +158,8 @@ de notre ECDSA. Ce point fait office de clé publique en quelque sorte. Pour ce 
 ce programme et non pas envoyé des messages avec !
 
 Il est seulement utilisé dans la fonction `verify()` qui ne vaut pas la peine d'être parcourue. Elle est complexe et ne nous servira pas.
+
+---
 
 <h3 align="center">
 Bon, ça vient cette résolution ?
@@ -219,8 +221,8 @@ for i in range(4):
   print(token)
 ```
 
-On remarque qu'en réalité les token sont de forme : *"{uid}|{r}|{s}"* avec les fameux r et s de la signature électronique vue ci-dessus.
-Et que la fonction `sign()` a été appelée avec les paramètres suivants pour trouver (r, s) :
+On remarque qu'en réalité les token sont de forme : *"{uid}|{r}|{s}"* avec les fameux `r` et `s` de la signature électronique vue ci-dessus.
+Et que la fonction `sign()` a été appelée avec les paramètres suivants pour trouver `(r, s)` :
 * C : C (courbe à utiliser)
 * sk : sk (clé privée)
 * msg : uid (message à envoyer)
@@ -252,25 +254,27 @@ Pour franchir ce premier if, il faut donc remplacer l'uid par "admin".
 
 Le deuxième, `if verify(C, Q, "admin", r, s):` vérifie simplement que c'est la bonne signature de "admin". La faille n'est pas ici.
 
-Il faut donc impérativement trouver le signature (r, s) assigné au message "admin" pour trouver le flag.
+Il faut donc impérativement trouver le signature `(r, s)` assigné au message "admin" pour trouver le flag.
+
+---
 
 <h3 align="center">
 Faille de l'implémentation
 </h3>
 
-Comme vous l'imaginez, il va nous falloir trouver le couple (r, s) pour pénétrer dans la base de donnée.
+Comme vous l'imaginez, il va nous falloir trouver le couple `(r, s)` pour pénétrer dans la base de donnée.
 
-Comme vous l'imaginez aussi, il va falloir trouver la clé privée `sk` qui apparaît dans la fonction sing().
+Comme vous l'imaginez aussi, il va falloir trouver la clé privée `sk` qui apparaît dans la fonction `sign()`.
 
-PS : `sk` n'est pas calculable en faisant Q / C.G pour les petits malins. La division n'est pas définie pour les points d'une ellipse 😉
+*PS : `sk` n'est pas calculable en faisant `Q / C.G` pour les petits malins. La division n'est pas définie pour les points d'une ellipse 😉*
 
-L'endroit où sk apparaît est dans l'équation pour trouver s :
+L'endroit où `sk` apparaît est dans l'équation pour trouver `s` :
 
 ```
 s = (modinv(k, C.q) * (h + sk * r)) % C.q
 ```
 
-Or, il nous manque certaines valeurs en local dans cette équation : k, h (et sk)
+Or, il nous manque certaines valeurs en local dans cette équation : `k`, `h` (et `sk`)
 
 En réalité, pas vraiment 😈
 
@@ -301,7 +305,7 @@ L'uid = "test_#01". Faisons un peu de python en console pour trouver son `k` et 
 
 Magnifique ! Voici un petit tableau récapitulatif de ce que nous avons actuellement :
 
-PS : `q` est égal à la valeur décimal de l'hexadécimal de `C.q` dans la déclaration de la courbe.
+*PS : `q` est égal à la valeur décimal de l'hexadécimal de `C.q` dans la déclaration de la courbe.*
 
 
 | Lettre | Valeur                                                                                                                                                     |
@@ -310,9 +314,11 @@ PS : `q` est égal à la valeur décimal de l'hexadécimal de `C.q` dans la déc
 | s      | 10066713059289160925333999328455981821059564507732314429708730262492915631839                                                                              |
 | q      | 109454571331697278617670725030735128146004546811402412653072203207726079563233                                                                             |
 | k      | 70733819118195826681301792940683243052880016025243997154863438540652504449380                                                                              |
-| h      | 1544461881294758573948802975326216816261488143147200983446003882855751099271603629121642960225347476612356698727897238006014871528157491774548977039638779 |
+| h      | 15444618812947585739488029753262168162614881431472009834460038828557510992716
+           03629121642960225347476612356698727897238006014871528157491774548977039638779                                                                              |
 
 Pour les calculs qui suivent, je vous conseille d'utiliser [Wolframalpha](https://www.wolframalpha.com/). Si certains calculs sont trop grand pour Wolframalpha, utiliser le logiciel [SageMath](http://www.sagemath.org/download.html)
+Notamment pour calculer des modulos avec de grands nombres.
 
 Reprenons notre équation et faisons un peu d'algèbre pour isoler `sk`.
 Attention, il faut savoir gérer les modulos. Je ne vais pas vous apprendre ça ici, je vous inviter à vous informer comment résoudre une équation linéaire avec des modulos.
@@ -335,15 +341,15 @@ Vous trouvez enfin la clé privée sk
 sk = 54989754048227462611102989128045902162485610361467521385775315607843320555920791685002430018879566596375253771775903449820104290331781361533849382269525
 ```
 
-Changez donc toute les valeurs dont vous n'avez pas disposition en local (Q et sk).
+Changez donc la valeur de `sk` dont vous n'avez pas accès en local.
 
-N'oubliez pas d'enlever l'extension "_#00" du message.
+N'oubliez pas d'enlever l'extension "_#00" dans la boucle for qui transforme votre message et pourra tout casser.
 
 Rentrer ensuite "admin" comme username dans votre script Python.
 
 ▶ Si vous n'êtes pas sûr, j'ai mis à disposition le code modifié => [modifiedCode.py](https://github.com/TeissierYannis/FCSC-2020/blob/master/crypto/Deterministic_ECDSA/modifiedCode.py)
 
-Récupérez le token et le tour est joué !
+Récupérer le token et le tour est joué !
 
 ```zsh
 hugo@kali:~/Desktop$ python3 ./decdsa.py
@@ -362,7 +368,7 @@ TQyODQ3MjIwNjM5MDI2OTkwNjY5OTY4NTk2NDV8ODAwNjkyMDYzMjg5NDk1Mjk1MTg2MjA1NT
 g0MTQ4NzI5NDQ1Mjg1Mjk3NDQ5MTY1MTczNjAzMDk5MjQ1ODMwNDczNjg1ODkzNTI2MTQ=
 ```
 
-Connecter vous ensuite au service :
+Connectez-vous ensuite au service :
 
 ```zsh
 hugo@kali:~/Desktop$ nc challenges1.france-cybersecurity-challenge.fr 2000
