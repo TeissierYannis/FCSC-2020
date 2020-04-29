@@ -35,6 +35,14 @@ if len(attachments) < 2:
     raise StoreError([f1_hash, f2_hash], self._get_flag())
 ```
 
+Ensuite, ont peut voir que le hash correspond à sha1
+```
+f1_hash = self._compute_sha1(self.f1)
+f2_hash = self._compute_sha1(self.f2)
+```
+
+Etant donnée le nom du script python, par déduction, il faut faire colider les deux sha1 pour bypass la condition **len(attachements) < 2**
+
 Le script récupere la signature sha1 des deux fichiers pdf, si les deux signatures sont identiques alors il y a collision. 
 
 L'utilisation de [PDF collider](https://alf.nu/SHA1) à été d'une grande aide, il suffit de mettre deux fichiers pdf, et nous donne des fichiers pdf avec le même sha1.
